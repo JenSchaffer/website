@@ -2,4 +2,10 @@
 title: "Trump's Tweets"
 ---
 
-Hello, Website!
+On November 8th, 2016, many people were shocked by the results of the 2016 United States Presidential Election and the election of Mr. Donald Trump. One reason this unexpected turn of events was surprising was the apparently incorrect polling results which declared Secretary Hilary Clinton the winner.  Not only a victory, but a landslide. This inaccurate polling data created a sense of complacency amongst Clinton supports and a sense of urgency in Trump supporters. 
+
+Now, President Trump is currently in office and it is time to reflect on how to better measure people’s views towards their potential leaders. 
+
+##My Project
+
+Using R Studio, I created a Shiny App which, in real-time, data mines twitter for Tweets about Trump. Then, my app analyses these tweets for their sentiment and displays it graphically. Next, the app compiles the highest frequency words by sentiment and prepares them into a word cloud. Finally, this application displays the tweets and their corresponding sentiment on the side for viewers to read. You can view this project under the "Twitter Analysis" tab or by clicking  [HERE](https://jenschaff.shinyapps.io/trumps_tweets/).       

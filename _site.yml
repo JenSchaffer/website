@@ -5,5 +5,7 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Twitter Analysis"
+      href: TrumpTwitter.html
     - text: "About"
       href: about.html

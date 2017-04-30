@@ -1,0 +1,10 @@
+name: trumps_tweets
+title: Trump's Tweets
+account: jenschaff
+server: shinyapps.io
+appId: 176556
+bundleId: 809398
+url: https://jenschaff.shinyapps.io/trumps_tweets/
+when: 1493523654.49923
+asMultiple: FALSE
+asStatic: FALSE
