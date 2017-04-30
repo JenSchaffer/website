@@ -1,6 +1,7 @@
 name: "my-website"
+theme: cerulean
 navbar:
-  title: "My Website"
+  title: "Trump's Tweets"
   left:
     - text: "Home"
       href: index.html
