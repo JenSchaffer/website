@@ -67,13 +67,59 @@ shinyServer(function(input, output, session) {
       results = data.frame(tweets = c("Positive", "Negative", "Neutral"), numbers = c(count_positive,count_negative,count_neutral))
       barplot(results$numbers, names = results$tweets, xlab = "Sentiment", ylab = "Counts", col = c("Green","Red","Blue"))
       if (length(positive_text) > 0){
-        output$positive_wordcloud <- renderPlot({ wordcloud(paste(positive_text, collapse=" "), min.freq = 10, random.color=TRUE, max.words=75 ,colors=brewer.pal(8, "Dark2"))  })
+        positive_corpus = Corpus(VectorSource(paste(positive_text, collapse = " ")))
+        tweets_transformed1 <- tm_map(positive_corpus, content_transformer(function(x)
+                                      iconv(x, to="UTF-8")))
+        tweets_transformed2 <- tm_map(tweets_transformed1,
+                                      content_transformer(tolower))
+        tweets_transformed3 <- tm_map(tweets_transformed2,
+                                      removePunctuation)
+        tweets_transformed4 <- tm_map(tweets_transformed3,function(x) 
+                                      x=removeWords(x,stopwords("english")))
+        tweets_transformed5 <- tm_map (tweets_transformed4, removeNumbers) 
+        tweets_transformed6 <- gsub("rt", "", tweets_transformed5)
+        tweets_transformed7 <- gsub("@\\w+", "", tweets_transformed6)
+        tweets_transformed8 <- gsub("http\\w+", "", tweets_transformed7)
+        tweets_transformed9 <- gsub("[ |\t]{2,}", "", tweets_transformed8)
+        tweets_transformed10 <- gsub("^ ", "", tweets_transformed9)
+        pos_tweets <- gsub(" $", "", tweets_transformed10)
+        output$positive_wordcloud <- renderPlot({ wordcloud(pos_tweets, min.freq = 0, random.color=TRUE, max.words=75 ,colors=brewer.pal(8, "Dark2"))  })
       }
       if (length(negative_text) > 0) {
-        output$negative_wordcloud <- renderPlot({ wordcloud(paste(negative_text, collapse=" "), random.color=TRUE,  min.freq = 10, max.words=75 ,colors=brewer.pal(8,"Set3"))  })
+        negative_corpus = Corpus(VectorSource(paste(negative_text, collapse = " ")))
+        tweets_transformed1 <- tm_map(negative_corpus, content_transformer(function(x)iconv(x, to="UTF-8")))
+        tweets_transformed2 <- tm_map(tweets_transformed1,
+                                      content_transformer(tolower))
+        tweets_transformed3 <- tm_map(tweets_transformed2,
+                                      removePunctuation)
+        tweets_transformed4 <- tm_map(tweets_transformed3,function(x) 
+          x=removeWords(x,stopwords("english")))
+        tweets_transformed5 <- tm_map (tweets_transformed4, removeNumbers) 
+        tweets_transformed6 <- gsub("rt", "", tweets_transformed5)
+        tweets_transformed7 <- gsub("@\\w+", "", tweets_transformed6)
+        tweets_transformed8 <- gsub("http\\w+", "", tweets_transformed7)
+        tweets_transformed9 <- gsub("[ |\t]{2,}", "", tweets_transformed8)
+        tweets_transformed10 <- gsub("^ ", "", tweets_transformed9)
+        neg_tweets <- gsub(" $", "", tweets_transformed10)
+        output$negative_wordcloud <- renderPlot({ wordcloud(neg_tweets, random.color=TRUE,  min.freq = 0, max.words=75 ,colors=brewer.pal(8,"Set3"))  })
       }
       if (length(neutral_text) > 0){
-        output$neutral_wordcloud <- renderPlot({ wordcloud(paste(neutral_text, collapse=" "), min.freq = 0, random.color=TRUE , max.words=75 ,colors=brewer.pal(8, "Dark2"))  })
+        neutral_corpus = Corpus(VectorSource(paste(neutral_text, collapse = " ")))
+        tweets_transformed1 <- tm_map(neutral_corpus, content_transformer(function(x)iconv(x, to="UTF-8")))
+        tweets_transformed2 <- tm_map(tweets_transformed1,
+                                      content_transformer(tolower))
+        tweets_transformed3 <- tm_map(tweets_transformed2,
+                                      removePunctuation)
+        tweets_transformed4 <- tm_map(tweets_transformed3,function(x) 
+          x=removeWords(x,stopwords("english")))
+        tweets_transformed5 <- tm_map (tweets_transformed4, removeNumbers) 
+        tweets_transformed6 <- gsub("rt", "", tweets_transformed5)
+        tweets_transformed7 <- gsub("@\\w+", "", tweets_transformed6)
+        tweets_transformed8 <- gsub("http\\w+", "", tweets_transformed7)
+        tweets_transformed9 <- gsub("[ |\t]{2,}", "", tweets_transformed8)
+        tweets_transformed10 <- gsub("^ ", "", tweets_transformed9)
+        neutral_tweets <- gsub(" $", "", tweets_transformed10)
+        output$neutral_wordcloud <- renderPlot({ wordcloud(neutral_tweets, min.freq = 0, random.color=TRUE , max.words=75 ,colors=brewer.pal(8, "Dark2"))  })
       }
     })
   })
