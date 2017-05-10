@@ -2,6 +2,6 @@
 title: "About Jennifer Schaffer"
 ---
 
-![Jennifer Schaffer](Website/jennifer.jpg)
+![Jennifer Schaffer](/Users/Jennifer/Documents/Website/jennifer.png)
 
 Jennifer is a senior at American University majoring in International Studies with a minor in Mathematics. She is a member of the Honor Society, Sigma Iota Rho. On campus she is involved in her sorority, Sigma Delta Tau, and has served as VP Social, Assistant Recruitment twice, as well being on the Slating Committee. During her time at AU, she has interned at the Woodrow Wilson International Center for Scholars as a Development Intern, AU Hillel as an Engagement Intern, and for the Turkish Women’s Initiative as a Communication Intern. Currently, she is a Researcher at American Foreign Policy Council, specializing in Global Islamic Extremism. Jennifer is also a CDI Intergroup Dialogue Facilitator on Religion and Bias. After graduation, she will be working for the Peace Corps as a volunteer in Rwanda. She will be teaching English, as well as doing youth and female empowerment. 
