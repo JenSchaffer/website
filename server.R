@@ -29,8 +29,17 @@ shinyServer(function(input, output, session) {
     tweets_result = searchTwitter("Trump", n=1500, resultType = "recent")
     for (tweet in tweets_result){
       print(paste(tweet$screenName, ":", tweet$text))
-      usableText=gsub("[^[:graph:]]", " ",tweet$text) 
-      s_v <- as.character(usableText)
+      usableText = gsub("[^[:graph:]]", " ",tweet$text)
+      clean_tweet = gsub("&amp", "", usableText)
+      clean_tweet = gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", clean_tweet)
+      clean_tweet = gsub("@\\w+", "", clean_tweet)
+      clean_tweet = gsub("[[:punct:]]", "", clean_tweet)
+      clean_tweet = gsub("[[:digit:]]", "", clean_tweet)
+      clean_tweet = gsub("http\\w+", "", clean_tweet)
+      clean_tweet = gsub("[ \t]{2,}", "", clean_tweet)
+      clean_tweet = gsub("^\\s+|\\s+$", "", clean_tweet) 
+      clean_tweet = gsub("http://t.co/[a-z,A-Z,0-9]*{8}","", clean_tweet)
+      s_v <- as.character(clean_tweet)
       vector_users <- c(vector_users, as.character(tweet$screenName));
       if ((get_sentiment(s_v, method = "syuzhet") >0) == TRUE){
         count_positive = count_positive + 1
